@@ -1,14 +1,19 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Visits</h1>
+<div class="container">
+  <h1>Job Board</h1>
 
-<div id="visits">
-  <% @visits.each do |visit| %>
-    <%= render visit %>
-    <p>
-      <%= link_to "Show this visit", visit %>
-    </p>
-  <% end %>
+  <div id="visits">
+    <% @visits.each do |visit| %>
+        <div class="card">
+          <%= render visit %>
+          <p>
+            <%= link_to "Show this visit", visit %>
+          </p>
+        </div>
+    <% end %>
+  </div>
+
+  <%= link_to "New visit", new_visit_path %>
 </div>
 
-<%= link_to "New visit", new_visit_path %>

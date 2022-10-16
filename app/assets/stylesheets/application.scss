@@ -1,0 +1,496 @@
+// uncomment me once aws working
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+
+
+
+
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --clr-primary-300: cyan;
+  --clr-primary-500: lightgreen;
+  --clr-primary-400: rgb(45, 138, 245); 
+
+  --clr-neutral-100: #f5f5f5;
+  --clr-neutral-200: lightgrey;
+  --clr-neutral-900: #1b1b1b;
+
+  --ff-primary: 'Open Sans', sans-serif;
+  --ff-accent: 'raleway', sans-serif;
+}
+
+body {
+  font-family: var(--ff-primary);
+  font-weight: 400;
+  font-size: 1.3125rem;
+  line-height: 1.6;
+}
+
+body,
+h1,
+h2,
+h3,
+li,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--ff-primary);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 1em;
+}
+
+h2,
+h3,
+p {
+  margin-bottom: 1em;
+}
+
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.content{
+  font-size: 21px;
+}
+
+.content-main{
+  flex: 1 1 0;
+  padding: 2rem;
+}
+
+.content-header{
+  font-size: 32px;
+}
+
+.content-subheader{
+  font-size: 26px;
+}
+
+.below-list{
+  margin-top: 15px;
+}
+
+.spaced{
+  margin: 35px;
+}
+
+.definitions{
+  margin-top: 20px;
+}
+
+.disc-list{
+  list-style-type: disc;
+}
+
+.no-style{
+  list-style-type: none;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.training-header{
+  background-color: white;
+}
+
+.training-header,
+section {
+  padding: 3rem 0;
+}
+
+.sidebar{
+  flex: 1 1 0;
+  max-width: 300px;
+  padding: 0px 5px;
+  background-color: var(--clr-primary-900);
+  position: fixed;
+}
+
+.sidebar h3{
+  color: var(--clr-neutral-900);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar .menu{
+  margin: 0 -1rem;    
+}
+
+.sidebar .menu .menu-item {
+  display:block;
+  padding: 1em;
+  color: var(--clr-neutral-900);
+  text-decoration: none;
+  transition: 0.2s linear;
+}
+
+.sidebar .menu .menu-item:hover,
+.sidebar .menu .menu-item.is-active {
+  color: var(--clr-neutral-900);
+  border-right: 5px solid --clr-primary-900;
+}
+
+.menu{
+  background-color: var(--clr-neutral-200);
+  width: 275px;
+  height: 1024px;
+}
+
+.container {
+  margin-inline: auto;
+  width: 90%
+}
+
+.split {
+  display: flex;
+  flex-direction: column;
+}
+
+.app{
+  display: flex;
+  min-height: 100vh;
+}
+
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 99px;
+  background-color: var(--clr-neutral-900);
+  cursor: pointer;
+}
+
+.hamburger {
+  position: relative;
+  top: calc(50% - 2px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+}
+
+.hamburger > span,
+.hamburger > span::before,
+.hamburger > span::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  border-radius: 99px;
+  background-color: var(--clr-neutral-100);
+  transition-duration: .25s;
+}
+
+.hamburger > span::before {
+  content: '';
+  top: -8px;
+}
+.hamburger > span::after {
+  content:'';
+  top: 8px;
+}
+
+.menu-toggle.is-active .hamburger > span{
+  transform: rotate(45deg);
+}
+.menu-toggle.is-active .hamburger > span::before {
+  top: 0;
+  transform: rotate(0deg);
+}
+.menu-toggle.is-active .hamburger > span::after{
+  top: 0;
+  transform: rotate(90deg);
+}
+
+@media (min-width: 1024px) {
+  .sidebar{
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 1860px) {
+  .menu-toggle{
+    display: block;
+  }
+  .sidebar{
+    position: fixed;
+    top: 0;
+    left: -300px;
+    height: 100vh;
+    width: 100%;
+    max-width: 300px;
+    transition: 0.2s linear;
+  }
+
+  .sidebar.is-active{
+    left: 0
+  }
+}
+
+@media (min-width: 768px) {
+  .split {
+    flex-direction: row;
+  }
+
+  .split > * {
+    flex-basis: 100%;
+  }
+
+  .split > * + * {
+    margin-left: 2em;
+  }
+}
+
+.container--narrow {
+  max-width: 600px;
+}
+
+.bg-cyan {
+  background-color: var(--clr-primary-300);
+  color: black
+}
+
+.bg-white {
+  background-color: var(--clr-neutral-100);
+}
+
+.bg-black {
+  background-color: var(--clr-neutral-900);
+  color:#f5f5f5
+}
+
+.bg-lightgreen {
+  background-color: var(--clr-primary-500);
+}
+
+.bg-blue{
+  background-color: var(--clr-primary-400);
+  color:#f5f5f5
+}
+
+header .navbar3 {
+// position: fixed;
+// width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 30px 10%;
+background-color: #bbb;
+}
+
+li .logo {
+cursor: pointer;
+}
+
+.nav_links {
+list-style: none;
+
+}
+.nav_links li {
+display: inline-block;
+max-width: 100%;
+padding: 0 50px;
+font-size: 35px;
+} 
+.nav_links li a {
+transition: all 0.3s ease 0s;
+}
+
+.nav_links li a:hover {
+color: #fff;
+background-color: rgba(128, 128, 128, 0.119);
+}
+
+
+.card {
+  background-color: #fff;
+  border: 2px solid #bacdd8;
+  padding: 8px;
+  border-radius: 12px;
+  margin: 25px auto;
+  max-width: 600px;
+}
+
+.job-button {
+  background: none;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+
+  font-weight: 600;
+  color: #0077ff;
+  background-color: #e0efff;
+
+  margin: 0 auto;
+  display: block;
+
+  cursor: pointer;
+}
+
+.job-button:hover {
+  background-color: #0077ff46;
+  color: #e0efff;
+  text-decoration: none;
+}
+
+// /* Fixed navbar, full width*/
+
+
+// li.nav-item {
+//   display: inline-block;
+//   margin: 0 auto;
+//   padding: 0;
+//   position: relative;
+//   top: -10px;
+//   color: red;
+// }
+
+
+// #navbar-brand {
+//   background-color: grey;
+// }
+
+// .nav-link{
+//     // margin-left: 200px;
+//     margin: 0 auto;
+// }
+
+//  /* Fixed sidenav, full height */
+//  .sidenav {
+//  height: 100%;
+//  width: 200px;
+//  position: fixed;
+//  z-index: 1;
+//  top: 0;
+//  left: 0;
+//  background-color: #D7E8E9;
+//  overflow-x: hidden;
+//  padding-top: 20px;
+//  padding-right: 20px;
+//  overflow: scroll;
+//  }
+
+//  .welcome-btn{
+//  margin-top: 50px;
+//  }
+
+//  .dashboard{
+//  font-family:'Open Sans';
+//  font-size: 30px;
+//  font-weight: bold;
+//  text-align: center;
+//  color: black;
+//  padding-top: 50px;
+//  max-width: 350px;
+//  min-width: 200px;
+//  position: relative;
+//  }
+
+//  // this sidebar needs to be redone
+//  .TDDLogo1{
+//  width: 100px;
+//  height: 50px;
+//  position: relative;
+//  left: 35px;
+//  position: relative;
+//  margin: 0 auto;
+//  padding: 0;
+//  }
+
+//  /* Style the sidenav links and the dropdown button */
+//  .sidenav_links a, .health-btn, .welcome-btn {
+//  padding: 6px 8px 6px 20px;
+//  text-decoration: none;
+//  font-size: 25px;
+//  font-family: 'Open Sans';
+//  color: black;
+//  display: block;
+//  border: none;
+//  background: none;
+//  width:100%;
+//  text-align: left;
+//  cursor: pointer;
+//  outline: none;
+//  }
+ 
+// /* On mouse-over */
+// .sidenav a:hover, .health-btn:hover, .welcome-btn:hover {
+// color: purple;
+// }
+// /* Main content */
+// .main {
+// margin-left: 200px; /* Same as the width of the sidenav */
+// font-size: 20px; /* Increased text to enable scrolling */
+// padding: 0px 10px;
+// }
+// /* Add an active class to the active dropdown button */
+// .active {
+// background-color: #D7E8E9;
+// color: black;
+// }
+// /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+// .dropdown-container {
+// display: none;
+// background-color: #D7E8E9;
+// padding-left: 8px;
+// }
+// a:focus {
+// border-right-color: darkblue;
+// border-right-width: 7px;
+// border-right-style: solid;
+// }
+
+// /* Optional: Style the caret down icon */
+// .fa-caret-left {
+// padding-right: 8px;
+// z-index: 1;
+// color: #2c3e50;
+// font-size: 10px;
+// position: relative;
+// bottom: 5px;
+// }
+
+// .construction-header {
+// z-index: 1;
+// position: absolute;
+// top: 350px;
+// left: 400px;
+// }
