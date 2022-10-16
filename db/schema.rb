@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_14_235904) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_16_152418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_235904) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "todos", force: :cascade do |t|
+    t.bigint "visit_id", null: false
+    t.text "content"
+    t.boolean "is_complete"
+    t.bigint "completed_by_id", null: false
+    t.datetime "completed_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["completed_by_id"], name: "index_todos_on_completed_by_id"
+    t.index ["visit_id"], name: "index_todos_on_visit_id"
   end
 
   create_table "user_visits", force: :cascade do |t|
@@ -53,6 +65,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_235904) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  create_table "visit_users", force: :cascade do |t|
+    t.bigint "visit_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_visit_users_on_user_id"
+    t.index ["visit_id"], name: "index_visit_users_on_visit_id"
+  end
+
   create_table "visits", force: :cascade do |t|
     t.integer "status"
     t.date "scheduled_date"
@@ -63,6 +84,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_235904) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "todos", "users", column: "completed_by_id"
+  add_foreign_key "todos", "visits"
   add_foreign_key "user_visits", "users"
   add_foreign_key "user_visits", "visits"
+  add_foreign_key "visit_users", "users"
+  add_foreign_key "visit_users", "visits"
 end
