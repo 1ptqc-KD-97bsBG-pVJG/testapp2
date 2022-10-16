@@ -13,6 +13,7 @@ class VisitsController < ApplicationController
   # GET /visits/new
   def new
     @visit = Visit.new
+    # @visit.todos.build
   end
 
   # GET /visits/1/edit
@@ -23,10 +24,13 @@ class VisitsController < ApplicationController
   def create
     @visit = Visit.new(visit_params)
 
+    # @visit.todos = Todo.new(visit_params[:todo_attributes])
+
     respond_to do |format|
       if @visit.save
         format.html { redirect_to visit_url(@visit), notice: "Visit was successfully created." }
         format.json { render :show, status: :created, location: @visit }
+        @visit.todos.build
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @visit.errors, status: :unprocessable_entity }
@@ -57,6 +61,7 @@ class VisitsController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_visit
@@ -66,6 +71,6 @@ class VisitsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def visit_params
       params.require(:visit).permit(:status, :scheduled_date, :scheduled_start, :scheduled_end, :scheduled_dudes,
-      todo_attributes: [:id, :content, :is_complete, :completed_by, :completed_time])
+      todo_attributes: [:id, :content, :is_complete, :completed_by_id, :completed_time])
     end
 end
