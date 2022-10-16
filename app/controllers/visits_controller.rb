@@ -65,6 +65,7 @@ class VisitsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def visit_params
-      params.require(:visit).permit(:status, :scheduled_date, :scheduled_start, :scheduled_end, :scheduled_dudes)
+      params.require(:visit).permit(:status, :scheduled_date, :scheduled_start, :scheduled_end, :scheduled_dudes,
+      todo_attributes: [:id, :content, :is_complete, :completed_by, :completed_time])
     end
 end
