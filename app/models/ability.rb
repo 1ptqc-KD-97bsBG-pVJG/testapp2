@@ -5,10 +5,11 @@ class Ability
 
   def initialize(user)
     # Define abilities for the user here. For example:
-      if user.has_role? :admin?
-        can :manage, :all
+      if user.customer?
+        can :manage, Visit
+        can :manage, Account
+        cannot :read, 
       else
-        can :read, :all
       end
        
     
