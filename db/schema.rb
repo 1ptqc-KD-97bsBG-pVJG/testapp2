@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_16_152418) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_17_034515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,9 +26,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_16_152418) do
 
   create_table "todos", force: :cascade do |t|
     t.bigint "visit_id", null: false
-    t.text "content"
-    t.boolean "is_complete"
-    t.bigint "completed_by_id", null: false
+    t.text "content", null: false
+    t.boolean "is_complete", default: false
+    t.bigint "completed_by_id"
     t.datetime "completed_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_16_152418) do
   end
 
   create_table "visits", force: :cascade do |t|
-    t.integer "status"
+    t.integer "status", default: 0
     t.date "scheduled_date"
     t.time "scheduled_start"
     t.time "scheduled_end"

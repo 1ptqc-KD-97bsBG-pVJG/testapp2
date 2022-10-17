@@ -12,11 +12,6 @@
   <% end %>
 
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
-  </div>
-
-  <div>
     <%= form.label :scheduled_date, style: "display: block" %>
     <%= form.date_field :scheduled_date %>
   </div>
@@ -32,19 +27,18 @@
   </div>
 
   <div>
-    <%= form.label :scheduled_dudes, style: "display: block" %>
+    <%= form.label :how_Many_Dudes?, style: "display: block" %>
     <%= form.number_field :scheduled_dudes %>
   </div>
 
-  <%= form.fields_for :todos do |builder| %>
-    <%= builder.text_field :content %>
-    <%= builder.check_box :is_complete? %>
-    <%= builder.label :completed_by_user, style: "display: block" %>
-    <%= builder.number_field :completed_by_id %>
-    <%= builder.time_field :completed_time %>
-  <% end %>
+  <div class="container">
+    <h4>Describe your To-do:</h4>
+    <%= form.fields_for :todos do |builder| %>
+      <%= builder.text_field :content %>
+    <% end %>
+  </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Request Job" %>
   </div>
 <% end %>
