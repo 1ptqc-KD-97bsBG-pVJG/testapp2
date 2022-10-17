@@ -10,6 +10,15 @@
           <p>
             <%= link_to "Show this visit", visit %>
           </p>
+          <% if visit.user_visits.count < visit.scheduled_dudes %>
+            <div class="job-button-join">
+              <%= link_to "Join Job", visit %>
+            </div>
+          <% else %>
+            <div class="job-button-full">
+              <p>Job Full</p>
+            </div>
+          <% end %>
         </div>
     <% end %>
   </div>

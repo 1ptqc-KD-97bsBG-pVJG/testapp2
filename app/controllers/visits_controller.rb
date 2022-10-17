@@ -14,7 +14,7 @@ class VisitsController < ApplicationController
   def new
     @visit = Visit.new
     @todo = @visit.todos.new
-    authorize! :manage, @visit
+    # authorize! :manage, @visit
     # @todo = @visit.todos.build
     # @visit.todos.build
   end

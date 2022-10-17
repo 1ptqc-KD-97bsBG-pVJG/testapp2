@@ -25,5 +25,12 @@
       <%= todo.content %>
     <% end %>
   </p>
+  
+  <p>
+    <strong>Team:</strong>
+    <% visit.user_visits.each do |team_member| %>
+      <%= User.find(team_member.user_id).email %>
+    <% end %>
+  </p>
 
 </div>

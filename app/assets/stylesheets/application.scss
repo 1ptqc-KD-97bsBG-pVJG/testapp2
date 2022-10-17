@@ -349,13 +349,17 @@ background-color: rgba(128, 128, 128, 0.119);
   max-width: 600px;
 }
 
-.job-button {
+
+// fix this please luis, it's bad!
+.job-button-join {
   background: none;
   border: none;
   padding: 12px 24px;
   border-radius: 50px;
+  max-width: 120px;
+  text-align: center;
+  font-weight: 600;  
 
-  font-weight: 600;
   color: #0077ff;
   background-color: #e0efff;
 
@@ -365,7 +369,28 @@ background-color: rgba(128, 128, 128, 0.119);
   cursor: pointer;
 }
 
-.job-button:hover {
+
+.job-button-full {
+  background: none;
+  border: none;
+  padding: 5px 24px;
+  border-radius: 50px;
+  max-width: 120px;
+  max-height: 30px;
+  text-align: center;
+  font-weight: 600;
+
+  color: #03030362 !important;
+  background-color: #ffe0e0;
+  
+
+  margin: 0 auto;
+  display: block;
+
+  cursor: not-allowed;
+}
+
+.job-button-join:hover {
   background-color: #0077ff46;
   color: #e0efff;
   text-decoration: none;
