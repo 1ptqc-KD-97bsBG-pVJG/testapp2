@@ -36,13 +36,12 @@
     <%= form.number_field :scheduled_dudes %>
   </div>
 
-  <%= fields_for :todo, @visit.todos.build do |todo_form| %>
-    <%= todo_form.label :content, style: "display: block" %>
-    <%= todo_form.text_field :content %>
-    <%# <%= todo_form.label :complete? %>
-    <%# <%= todo_form.select :is_complete, [["Yes", True]] %>
-    <%= todo_form.label :completed_by %>
-    <%= todo_form.number_field :completed_by_id %>
+  <%= form.fields_for :todos do |builder| %>
+    <%= builder.text_field :content %>
+    <%= builder.check_box :is_complete? %>
+    <%= builder.label :completed_by_user, style: "display: block" %>
+    <%= builder.number_field :completed_by_id %>
+    <%= builder.time_field :completed_time %>
   <% end %>
 
   <div>
