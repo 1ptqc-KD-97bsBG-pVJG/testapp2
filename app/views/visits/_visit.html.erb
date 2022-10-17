@@ -24,4 +24,11 @@
     <%= visit.scheduled_dudes %>
   </p>
 
+  <p>
+    <strong>Todos:</strong>
+    <% visit.todos.each do |todo| %>
+      <%= todo.content %>
+    <% end %>
+  </p>
+
 </div>
