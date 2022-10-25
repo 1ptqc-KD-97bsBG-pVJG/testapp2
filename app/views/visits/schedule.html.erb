@@ -7,10 +7,9 @@
     <% @visits.each do |visit| %>
         <div class="card">
           <%= render visit %>
-          <p>
-            <%= link_to "Show this visit", visit %>
-          </p>
-          <%= link_to "Test", visit %>
+          <div class="job-button-leave">
+            <%= link_to "Leave Job", visit %>
+          </div>
         </div>
     <% end %>
   </div>
