@@ -6,6 +6,12 @@ class VisitsController < ApplicationController
     @visits = Visit.all
   end
 
+  def schedule
+    @visits = User.find(current_user.id).visits
+    # @visits = UserVisit.where(user_id: current_user.id).find_each()
+    # @visits = Visit.where(UserVisit.where(user_id: current_user.id)).find_each()
+  end
+
   # GET /visits/1 or /visits/1.json
   def show
   end

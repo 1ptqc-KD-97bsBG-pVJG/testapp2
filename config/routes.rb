@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get "/book-now" => "visits#new"
   get "/job-board" => "visits#index"
   get "/account" => "application#account"
+  get "/schedule" => "visits#schedule"
 end
