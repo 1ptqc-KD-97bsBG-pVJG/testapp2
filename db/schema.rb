@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_17_040957) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_25_181240) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_040957) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "time_entries", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "visit_id", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer "status", default: 0
+    t.boolean "predicted", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_time_entries_on_user_id"
+    t.index ["visit_id"], name: "index_time_entries_on_visit_id"
   end
 
   create_table "todos", force: :cascade do |t|
@@ -86,6 +99,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_040957) do
     t.index ["customer_id"], name: "index_visits_on_customer_id"
   end
 
+  add_foreign_key "time_entries", "users"
+  add_foreign_key "time_entries", "visits"
   add_foreign_key "todos", "users", column: "completed_by_id"
   add_foreign_key "todos", "visits"
   add_foreign_key "user_visits", "users"

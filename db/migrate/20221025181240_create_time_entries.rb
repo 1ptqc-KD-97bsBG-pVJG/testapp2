@@ -6,7 +6,7 @@ class CreateTimeEntries < ActiveRecord::Migration[7.0]
       t.datetime :start_time
       t.datetime :end_time
       t.integer :status, default: 0
-      t.boolean :predicted, default: False
+      t.boolean :predicted, default: false
 
       t.timestamps
     end
