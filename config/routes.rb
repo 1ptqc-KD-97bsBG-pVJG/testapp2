@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :time_entries
   resources :visits
+  resources :user_visits
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }

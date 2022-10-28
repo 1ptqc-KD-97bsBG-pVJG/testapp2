@@ -4,6 +4,7 @@ class VisitsController < ApplicationController
   # GET /visits or /visits.json
   def index
     @visits = Visit.all
+    @user = current_user
   end
 
   def schedule
@@ -32,12 +33,6 @@ class VisitsController < ApplicationController
   # POST /visits or /visits.json
   def create
     @visit = Visit.new(visit_params)
-    # @visit.todos.build(visit_params[:todo])
-    # todo = Todo.new
-    # todo.content = visit_params[:todo][:content]
-    # todo.save
-
-    # @visit.todos = Todo.new(visit_params[:todo_attributes])
 
     respond_to do |format|
       if @visit.save
@@ -46,6 +41,7 @@ class VisitsController < ApplicationController
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @visit.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -82,7 +78,7 @@ class VisitsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def visit_params
-      params.require(:visit).permit(:status, :scheduled_date, :scheduled_start, :scheduled_end, :scheduled_dudes,
+      params.require(:visit).permit(:status, :scheduled_date, :scheduled_start, :scheduled_end, :scheduled_dudes, :customer_id,
       todos_attributes: [:id, :visit_id, :content, :is_complete, :completed_by_id, :completed_time, :created_ad, :updated_at])
     end
 end
