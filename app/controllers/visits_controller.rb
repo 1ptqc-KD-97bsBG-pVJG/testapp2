@@ -3,7 +3,7 @@ class VisitsController < ApplicationController
 
   # GET /visits or /visits.json
   def index
-    @visits = Visit.all
+    @visits = Visit.order(scheduled_dudes: :desc)
     @user = current_user
   end
 

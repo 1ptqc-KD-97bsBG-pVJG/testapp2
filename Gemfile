@@ -47,6 +47,8 @@ gem 'devise'
 gem 'cancancan'
 gem 'rolify'
 
+gem 'jquery-rails'
+
 
 # Use Sass to process CSS
 gem "sassc-rails"

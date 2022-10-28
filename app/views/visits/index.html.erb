@@ -6,7 +6,7 @@
   <div id="visits">
     <% @visits.each do |visit| %>
         <div class="card">
-          <%= render visit %>
+          <span id="jobcard"> <%= render visit %> </span>
           <p>
             <%= link_to "Show this visit", visit %>
             <div>
@@ -15,25 +15,22 @@
                 visit.id: <%= visit.id %>
               </div>
               <div>
-                associated users: <%= visit.user_visits.count %>
+                associated users: <span id="assocaited-users"><%= visit.user_visits.count %></span>
               </div>
               <div>
                 customer_id: <%= visit.customer_id %>
               </div>
             </div>
           </p>
+          <%# job buttons %>
           <% if visit.user_visits.count < visit.scheduled_dudes %>
-            <%# <div class="job-button-join"> %>
-              <%# <%= link_to "Join Job", visit %>
-              <%= form_with(model: visit.user_visits.build, remote: true) do |f| %>
+              <%= form_with(model: visit.user_visits.build, local: false) do |f| %>
                 <%= f.hidden_field :user_id, value: current_user.id %>
                 <%= f.hidden_field :visit_id, value: visit.id %>
                 <div>
-                  <%# <%= hidden_field_tag :visit_id, visit.id %>
                 </div>
                 <%= f.submit "Join Job", class: "job-button-join" %>
               <% end %>
-            <%# </div> %>
           <% else %>
             <div class="job-button-full">
               <p>Job Full</p>
