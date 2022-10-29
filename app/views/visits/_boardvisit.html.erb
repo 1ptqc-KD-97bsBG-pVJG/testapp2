@@ -1,0 +1,33 @@
+<div class="card">
+  <span id="jobcard"> <%= render "visits/visit", visit: boardvisit %> </span>
+  <p>
+    <%= link_to "Show this visit", boardvisit %>
+    <div>
+      <strong>DEVELOPER:</strong>
+      <div>
+        visit.id: <%= boardvisit.id %>
+      </div>
+      <div>
+        associated users: <span id="assocaited-users"><%= boardvisit.user_visits.count %></span>
+      </div>
+      <div>
+        customer_id: <%= boardvisit.customer_id %>
+      </div>
+    </div>
+  </p>
+  <%# job buttons %>
+  <% if boardvisit.user_visits.count < boardvisit.scheduled_dudes %>
+      <%= form_with(model: boardvisit.user_visits.build, local: false) do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :visit_id, value: boardvisit.id %>
+        <div>
+        </div>
+        <%= f.submit "Join Job", class: "job-button-join" %>
+      <% end %>
+  <% else %>
+    <div class="job-button-full">
+      <p>Job Full</p>
+    </div>
+  <% end %>
+  <%= link_to "Test", boardvisit %>
+</div>

@@ -1,6 +1,6 @@
 class UserVisitsController < ApplicationController
     def create
-        @user_visit = UserVisit.new(user_visit_params)
+        @user_visit = UserVisit.new(user_visit_params)        
         # @user = User.find(params[:id])
         # @visit = Visit.find(params[:visit_id])
         respond_to do |format|
@@ -12,6 +12,10 @@ class UserVisitsController < ApplicationController
               format.json { render json: @user_visit.errors, status: :unprocessable_entity }
             end
           end
+    end
+
+    def visits
+      @visits = Visit.order(scheduled_dudes: :desc)
     end
 
 

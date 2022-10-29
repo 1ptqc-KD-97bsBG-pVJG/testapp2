@@ -36,12 +36,11 @@ class VisitsController < ApplicationController
 
     respond_to do |format|
       if @visit.save
-        format.html { redirect_to visit_url(@visit), notice: "Visit was successfully created." }
+        format.html { redirect_to root_path, notice: "Visit was successfully created." }
         format.json { render :show, status: :created, location: @visit }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @visit.errors, status: :unprocessable_entity }
-        format.js
       end
     end
   end

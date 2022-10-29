@@ -1,1 +1,3 @@
-$("#jobcard").html("<%= escape_javascript render('visits/visit', visit: visit) %>")
+
+
+$("#jobboard").html("<%= j render partial: 'visits/boardvisit', collection: (Visit.order(scheduled_dudes: :desc)) %>")
