@@ -16,18 +16,24 @@
     </div>
   </p>
   <%# job buttons %>
-  <% if boardvisit.user_visits.count < boardvisit.scheduled_dudes %>
-      <%= form_with(model: boardvisit.user_visits.build, local: false) do |f| %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.hidden_field :visit_id, value: boardvisit.id %>
+  <% if User.find(current_user.id).visits.include? boardvisit %>
+      <%= form_with(model: boardvisit.user_visits.find_by(user_id: current_user.id), local: false, method: :delete) do |f| %>
+        <%= f.hidden_field :visit, value: boardvisit %>
         <div>
         </div>
-        <%= f.submit "Join Job", class: "job-button-join" %>
+        <%= f.submit "Leave Job", class: "job-button-leave" %>
       <% end %>
-  <% else %>
-    <div class="job-button-full">
-      <p>Job Full</p>
-    </div>
-  <% end %>
-  <%= link_to "Test", boardvisit %>
+    <% elsif boardvisit.user_visits.count < boardvisit.scheduled_dudes %>
+        <%= form_with(model: boardvisit.user_visits.build, local: false) do |f| %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :visit_id, value: boardvisit.id %>
+          <div>
+          </div>
+          <%= f.submit "Join Job", class: "job-button-join" %>
+        <% end %>
+    <% else %>
+      <div class="job-button-full">
+        <p>Job Full</p>
+      </div>
+    <% end %>
 </div>

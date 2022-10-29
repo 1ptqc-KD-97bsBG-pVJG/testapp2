@@ -1,5 +1,9 @@
 class UserVisitsController < ApplicationController
-    def create
+  def index
+
+  end
+  
+  def create
         @user_visit = UserVisit.new(user_visit_params)        
         # @user = User.find(params[:id])
         # @visit = Visit.find(params[:visit_id])
@@ -11,7 +15,20 @@ class UserVisitsController < ApplicationController
               format.html { render :new, status: :unprocessable_entity }
               format.json { render json: @user_visit.errors, status: :unprocessable_entity }
             end
-          end
+        end
+    end
+
+    def destroy
+      @user_visit = UserVisit.find(params[:id])
+      respond_to do |format|
+        if @user_visit.destroy
+          format.html { redirect_to Visit.find(params[:visit_id]) }
+          format.js
+        else
+          format.html { render :index, status: :unprocessable_entity }
+          format.json { render json: @user_visit.errors, status: :unprocessable_entity }
+        end
+    end
     end
 
     def visits
