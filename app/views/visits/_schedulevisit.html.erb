@@ -17,6 +17,10 @@
                 <%= f.submit "Stop Timer", class: "job-button-timer-stop" %>
             <% end %>
 
+            <span id="timer-content">
+
+            </span>
+
         <% else %>
             <strong><p>Saved time entry:</p></strong>
             <p><%= (time_entry.end_time - time_entry.start_time).round() %> seconds</p>
@@ -39,6 +43,8 @@
             <%= f.submit "Start Timer", class: "job-button-timer-start" %>
         <% end %>
     <% end %>
+
+    
     
 
 </div>
