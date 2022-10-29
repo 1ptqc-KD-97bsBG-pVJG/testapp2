@@ -1,17 +1,44 @@
 <div class="card">
     <span id="jobcard"> <%= render "visits/visit", visit: schedulevisit %> </span>
 
-    <% if schedulevisit.time_entries.find_by(user_id: current_user.id) %>
-        <p>Time entry exists!</p>
+    <% time_entry = schedulevisit.time_entries.find_by(user_id: current_user.id) %>
+    
+    <% if time_entry %>
+        <% if time_entry.end_time.nil? %>
+            <p>Timer started but not ended!</p>
+            
+            <%# Stop timer %>
+            <%= form_with(model: schedulevisit.time_entries.find_by(user_id: current_user.id), local: false, method: :patch) do |f| %>
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                <%= f.hidden_field :visit_id, value: schedulevisit.id %>
+                <%= f.hidden_field :end_time, value: Time.new %>
+                <div>
+                </div>
+                <%= f.submit "Stop Timer", class: "job-button-timer-stop" %>
+            <% end %>
+
+        <% else %>
+            <strong><p>Saved time entry:</p></strong>
+            <p><%= (time_entry.end_time - time_entry.start_time).round() %> seconds</p>
+            <div>
+                <%= time_entry.start_time %>
+            </div>
+            <div>
+                <%= time_entry.end_time %>
+            </div>
+        <% end %>
+
+    <% else %>
+        <%# Start timer %>
+        <%= form_with(model: schedulevisit.time_entries.build, local: false) do |f| %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.hidden_field :visit_id, value: schedulevisit.id %>
+            <%= f.hidden_field :start_time, value: Time.new %>
+            <div>
+            </div>
+            <%= f.submit "Start Timer", class: "job-button-timer-start" %>
+        <% end %>
     <% end %>
     
-    <%= form_with(model: schedulevisit.time_entries.build, local: false) do |f| %>
-          <%= f.hidden_field :user_id, value: current_user.id %>
-          <%= f.hidden_field :visit_id, value: schedulevisit.id %>
-          <%= f.hidden_field :start_time, value: Time.new %>
-          <div>
-          </div>
-          <%= f.submit "Start Timer", class: "job-button-timer-start" %>
-    <% end %>
 
 </div>

@@ -14,6 +14,16 @@ class TimeEntriesController < ApplicationController
         end
     end
 
+    def update
+        @time_entry = TimeEntry.find(params[:id])
+        respond_to do |format|
+            if @time_entry.update(time_entry_params)
+                format.html { redirect_to @time_entry }
+                format.js
+            end
+        end
+    end
+
     private
     # Use callbacks to share common setup or constraints between actions.
     def set_time_entry
