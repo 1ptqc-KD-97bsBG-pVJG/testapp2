@@ -1,14 +1,10 @@
 <div class="card">
     <span id="jobcard"> <%= render "visits/visit", visit: schedulevisit %> </span>
 
-    <% if User.find(current_user.id).time_entries.include? schedulevisit %>
+    <% if schedulevisit.time_entries.find_by(user_id: current_user.id) %>
         <p>Time entry exists!</p>
     <% end %>
     
-    <% User.find(current_user.id).time_entries.each do |entry| %>
-        <%= entry.visit_id %>
-    <% end %>
-
     <%= form_with(model: schedulevisit.time_entries.build, local: false) do |f| %>
           <%= f.hidden_field :user_id, value: current_user.id %>
           <%= f.hidden_field :visit_id, value: schedulevisit.id %>
