@@ -2,6 +2,7 @@ class Visit < ApplicationRecord
     has_many :user_visits
     has_many :users, through: :user_visits
     has_many :todos
+    has_many :time_entries
     accepts_nested_attributes_for :todos
 
     # def todos 

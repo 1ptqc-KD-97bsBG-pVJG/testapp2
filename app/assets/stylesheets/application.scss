@@ -414,6 +414,28 @@ background-color: rgba(128, 128, 128, 0.119);
   text-decoration: none;
 }
 
+
+.job-button-start-timer {
+  background: none;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  max-width: 120px;
+  text-align: center;
+  font-weight: 600;  
+
+  color: #0077ff;
+  background-color: #e0ffe6;
+
+  margin: 0 auto;
+  display: block;
+
+  cursor: pointer;
+}
+
+
+
+
 // /* Fixed navbar, full width*/
 
 
